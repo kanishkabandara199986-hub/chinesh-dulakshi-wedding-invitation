@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>චිනේෂ් සහ දුලක්ෂි | Chinesh & Dulakshi - Wedding Invitation</title>
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="චිනේෂ් සහ දුලක්ෂි | Chinesh & Dulakshi - Royal Kandyan Wedding Invitation" />
+  <meta name="description" content="අපගේ විවාහ මංගල්‍යයේ සුබ මොහොතට ඔබට සහ පවුලේ සැමට සාදරයෙන් ආරාධනා කරමු. 2026 දෙසැම්බර් 07 වන දින රෝයල් චාන්ස් පැලස් බෑන්ක්වට්, කලගෙඩිහේන." />
+  <meta name="theme-color" content="#5B0E1B" />
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://chinesh-dulakshi-wedding.netlify.app/" />
+  <meta property="og:title" content="චිනේෂ් සහ දුලක්ෂි | Chinesh & Dulakshi - Wedding Invitation" />
+  <meta property="og:description" content="Join us to celebrate the royal wedding of Chinesh & Dulakshi on December 07th, 2026 at Royal Chance Palace Banquet, Kalagedihena." />
+  <meta property="og:image" content="/preview.jpg" />
+
+  <!-- Twitter Meta Tags -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content="චිනේෂ් සහ දුලක්ෂි | Chinesh & Dulakshi - Wedding Invitation" />
+  <meta property="twitter:description" content="Join us to celebrate the royal wedding of Chinesh & Dulakshi on December 07th, 2026 at Royal Chance Palace Banquet, Kalagedihena." />
+  <meta property="twitter:image" content="/preview.jpg" />
+
+  <!-- Google Fonts: Traditional Sinhala & Luxury English Serifs -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Noto+Serif+Sinhala:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+
+  <!-- AOS (Animate on Scroll) -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+</head>
+
+<body class="inv-wrap">
+  <!-- Custom Golden Blossom Cursor for Desktop -->
+  <div class="custom-cursor" aria-hidden="true">✨</div>
+
+  <!-- Royal Preloader Screen -->
+  <div id="loading-screen" role="dialog" aria-modal="true" aria-label="Loading Invitation">
+    <div class="loading-content">
+      <!-- Traditional Lotus / Pun-kalasa Animated SVG Emblem -->
+      <svg class="kandyan-loader-emblem" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="44" stroke="#D4AF37" stroke-width="2" stroke-dasharray="4 3" opacity="0.6"/>
+        <circle cx="50" cy="50" r="38" stroke="#D4AF37" stroke-width="1.2" opacity="0.8"/>
+        <!-- Lotus Petals -->
+        <g fill="#D4AF37" opacity="0.9">
+          <path d="M50 18 C53 28 58 36 50 48 C42 36 47 28 50 18 Z"/>
+          <path d="M50 82 C53 72 58 64 50 52 C42 64 47 72 50 82 Z"/>
+          <path d="M18 50 C28 53 36 58 48 50 C36 42 28 47 18 50 Z"/>
+          <path d="M82 50 C72 53 64 58 52 50 C64 42 72 47 82 50 Z"/>
+          <path d="M28 28 C38 34 42 42 50 50 C42 42 34 38 28 28 Z"/>
+          <path d="M72 72 C62 66 58 58 50 50 C58 58 66 62 72 72 Z"/>
+          <path d="M72 28 C66 38 58 42 50 50 C58 42 62 34 72 28 Z"/>
+          <path d="M28 72 C34 62 42 58 50 50 C42 58 38 66 28 72 Z"/>
+        </g>
+        <circle cx="50" cy="50" r="7" fill="#5B0E1B" stroke="#F5E7B2" stroke-width="1.5"/>
+      </svg>
+
+      <div class="loading-text">
+        <span class="loading-names-si">චිනේෂ් & දුලක්ෂි</span>
+        <span class="loading-names-en">Chinesh & Dulakshi</span>
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="progress-text">
+          ආයුබෝවන් • <span id="progress-number">0</span>%
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating System Controls -->
+  <aside class="floating-controls" aria-label="Quick Actions">
+    <!-- Music Player Toggle -->
+    <button id="music-toggle" class="control-btn" title="Toggle Background Music" aria-label="Toggle Music">
+      <i class="ti ti-music" id="music-icon" aria-hidden="true"></i>
+    </button>
+    <!-- Add to Calendar Shortcut -->
+    <a href="#calendar-anchor" class="control-btn" title="Add to Calendar" aria-label="Calendar shortcut">
+      <i class="ti ti-calendar-plus" aria-hidden="true"></i>
+    </a>
+  </aside>
+
+  <audio id="bg-music" loop preload="none">
+    <source src="/assets/audio/wedding.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Mobile Shell Container -->
+  <div class="invitation-shell">
+    <main id="main-content" style="opacity: 0; visibility: hidden;">
+
+      <!-- ===================================================================
+           1. HERO SECTION (රාජකීය ආරම්භය)
+           =================================================================== -->
+      <section class="hero" id="hero-section" data-aos="fade-in" data-aos-duration="1500">
+        <!-- Traditional Kandyan Liya-vela Corner Flourishes -->
+        <svg class="corner-liya top-left" viewBox="0 0 100 100" fill="currentColor">
+          <path d="M0,0 L70,0 C65,15 50,20 40,30 C30,40 32,55 20,65 C12,72 0,70 0,70 Z" opacity="0.35"/>
+          <path d="M10,10 Q35,12 45,35 Q30,45 20,30 Q12,20 10,10 Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="25" cy="25" r="4" fill="currentColor"/>
+          <circle cx="45" cy="15" r="2.5" fill="currentColor"/>
+          <circle cx="15" cy="45" r="2.5" fill="currentColor"/>
+        </svg>
+
+        <svg class="corner-liya top-right" viewBox="0 0 100 100" fill="currentColor">
+          <path d="M0,0 L70,0 C65,15 50,20 40,30 C30,40 32,55 20,65 C12,72 0,70 0,70 Z" opacity="0.35"/>
+          <path d="M10,10 Q35,12 45,35 Q30,45 20,30 Q12,20 10,10 Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="25" cy="25" r="4" fill="currentColor"/>
+        </svg>
+
+        <!-- Auspicious Invocation Header -->
+        <div class="auspicious-invocation">
+          <span>✦</span> ශ්‍රී සුබ මංගලම් <span>✦</span>
+        </div>
+        <p class="auspicious-sub">Together with our families</p>
+
+        <!-- Couple Names Display -->
+        <div class="hero-names-wrap" data-aos="zoom-in" data-aos-delay="200">
+          <h1 class="couple-names-si">
+            චිනේෂ් <span class="names-ampersand">&</span> දුලක්ෂි
+          </h1>
+          <p class="couple-names-en">Chinesh & Dulakshi</p>
+        </div>
+
+        <!-- Royal Kandyan Couple Illustration Card -->
+        <div class="couple-art-container" data-aos="zoom-in" data-aos-delay="400">
+          <div class="couple-art-frame">
+            <img 
+              src="/images/kandyan_couple.jpg" 
+              alt="Chinesh & Dulakshi - Traditional Kandyan Wedding Illustration" 
+              class="couple-art-img"
+              loading="eager"
+            />
+          </div>
+        </div>
+
+        <!-- Wedding Date & Venue Tag -->
+        <div class="wedding-date-tag" data-aos="fade-up" data-aos-delay="500">
+          <span class="wedding-date-text">December 07th, 2026</span>
+          <span class="wedding-date-si">2026 දෙසැම්බර් මස 07 වන සඳුදා</span>
+        </div>
+
+        <div class="wedding-venue-pill" data-aos="fade-up" data-aos-delay="600">
+          <i class="ti ti-map-pin" aria-hidden="true"></i>
+          <span>Royal Chance Palace Banquet, Kalagedihena</span>
+        </div>
+
+        <!-- Scroll Explore Indicator -->
+        <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="700">
+          <span>Scroll to Open</span>
+          <i class="ti ti-chevron-down" aria-hidden="true"></i>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           2. INVITATION & PARENTAL BLESSINGS SECTION (ආරාධනා පත්‍රය)
+           =================================================================== -->
+      <section class="invitation-section" id="invitation" data-aos="fade-up">
+        <!-- Traditional Pun-kalasa & Nelum Divider -->
+        <div class="kandyan-divider">
+          <span class="divider-icon">
+            <svg class="divider-lotus-svg" viewBox="0 0 24 24">
+              <path d="M12 2C13 6 15 9 12 14C9 9 11 6 12 2Z"/>
+              <path d="M12 14C16 11 19 12 21 16C17 17 14 16 12 14Z"/>
+              <path d="M12 14C8 11 5 12 3 16C7 17 10 16 12 14Z"/>
+              <circle cx="12" cy="17" r="1.5"/>
+            </svg>
+          </span>
+        </div>
+
+        <span class="section-badge">Formal Invitation</span>
+        <h2 class="section-title-si">ආරාධනා පත්‍රය</h2>
+        <p class="section-title-en">Parental Blessings</p>
+
+        <div class="invitation-card" data-aos="zoom-in" data-aos-delay="150">
+          <!-- Traditional Pun-kalasa SVG (Vessel of Prosperity) -->
+          <svg class="pun-kalasa-icon" viewBox="0 0 64 64" fill="currentColor">
+            <!-- Pun-kalasa Pot -->
+            <path d="M22 28 C22 24, 42 24, 42 28 C42 32, 48 36, 48 46 C48 54, 16 54, 16 46 C16 36, 22 32, 22 28 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M18 48 C24 51, 40 51, 46 48" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <path d="M22 38 C28 41, 36 41, 42 38" stroke="currentColor" stroke-width="1.2" fill="none"/>
+            <!-- Coconut Blossom & Leaves Sprouting -->
+            <path d="M32 24 L32 8" stroke="currentColor" stroke-width="2"/>
+            <path d="M32 16 Q24 10 18 12 Q26 18 32 20" fill="currentColor" opacity="0.8"/>
+            <path d="M32 16 Q40 10 46 12 Q38 18 32 20" fill="currentColor" opacity="0.8"/>
+            <path d="M32 10 Q28 4 22 6 Q28 12 32 14" fill="currentColor" opacity="0.7"/>
+            <path d="M32 10 Q36 4 42 6 Q36 12 32 14" fill="currentColor" opacity="0.7"/>
+            <circle cx="32" cy="6" r="2.5" fill="currentColor"/>
+          </svg>
+
+          <p class="invitation-intro">
+            With the graceful blessings of the Noble Triple Gem and together with our respected families, we cordially invite you to grace the sacred union of
+          </p>
+
+          <!-- Bride's Family Block -->
+          <div class="family-block" data-aos="fade-left" data-aos-delay="250">
+            <span class="family-title">Bride's Parents</span>
+            <p class="family-parents">
+              වයි. ඒ. ධර්මදාස යාපා මහතා සහ <br/>
+              ඒ. එම්. ශ්‍රීමා ලක්මාලි මහත්මිය
+            </p>
+            <p class="family-parents-en">
+              Daughter of Mrs. A.M. Shrima Lakmali & Mr. Y.A. Dharmadasa Yapa
+            </p>
+            <p class="family-relation">
+              Daughter • දුලක්ෂි (Dulakshi)
+            </p>
+          </div>
+
+          <!-- Connecting Floral Symbol -->
+          <div style="color: var(--gold-primary); font-size: 16px; margin: 0.4rem 0;">❦</div>
+
+          <!-- Groom's Family Block -->
+          <div class="family-block" data-aos="fade-right" data-aos-delay="350">
+            <span class="family-title">Groom's Parents</span>
+            <p class="family-parents">
+              ජී. ලයනල් පෙරේරා මහතා සහ <br/>
+              ඩී. ඩබ්. සී. මනෝෂිකා මහත්මිය
+            </p>
+            <p class="family-parents-en">
+              Son of Mrs. D.W.C. Manoshika & Mr. G. Layanal Perera
+            </p>
+            <p class="family-relation">
+              Son • චිනේෂ් (Chinesh)
+            </p>
+          </div>
+
+          <p class="invitation-closing">
+            "We request the honour of your esteemed presence and heartfelt blessings as we step into this auspicious new chapter of life."
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           3. COUNTDOWN TIMER SECTION (මංගල නැකතට ගණනය කිරීම)
+           =================================================================== -->
+      <section class="countdown-section" id="calendar-anchor" data-aos="fade-up">
+        <div class="kandyan-divider">
+          <span class="divider-icon">
+            <svg class="divider-lotus-svg" viewBox="0 0 24 24">
+              <path d="M12 2C13 6 15 9 12 14C9 9 11 6 12 2Z"/>
+              <path d="M12 14C16 11 19 12 21 16C17 17 14 16 12 14Z"/>
+              <path d="M12 14C8 11 5 12 3 16C7 17 10 16 12 14Z"/>
+            </svg>
+          </span>
+        </div>
+
+        <span class="section-badge">Save the Date</span>
+        <h2 class="section-title-si">සුබ මොහොත එළඹෙන තෙක්</h2>
+        <p class="section-title-en">Counting Every Moment</p>
+        <p class="section-subtitle">Until December 07, 2026 • 10:00 AM</p>
+
+        <!-- Dynamic Countdown Grid -->
+        <div class="countdown-grid" data-aos="zoom-in" data-aos-delay="200">
+          <div class="cd-box">
+            <span class="cd-num" id="cd-days">00</span>
+            <span class="cd-label">Days / දින</span>
+          </div>
+          <div class="cd-box">
+            <span class="cd-num" id="cd-hours">00</span>
+            <span class="cd-label">Hours / පැය</span>
+          </div>
+          <div class="cd-box">
+            <span class="cd-num" id="cd-mins">00</span>
+            <span class="cd-label">Mins / මිනි</span>
+          </div>
+          <div class="cd-box">
+            <span class="cd-num" id="cd-secs">00</span>
+            <span class="cd-label">Secs / තත්</span>
+          </div>
+        </div>
+
+        <!-- Add to Calendar Action Buttons -->
+        <div class="calendar-action-wrap" data-aos="fade-up" data-aos-delay="300">
+          <!-- Google Calendar Direct Pre-filled Link -->
+          <a 
+            class="btn-calendar" 
+            id="btn-google-cal" 
+            href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+Celebration+of+Chinesh+%26+Dulakshi&dates=20261207T043000Z/20261207T103000Z&details=Wedding+Celebration+of+Chinesh+(%E0%B6%A0%E0%B7%92%E0%B6%B1%E0%B7%9A%E0%B7%82%E0%B7%8A)+%26+Dulakshi+(%E0%B6%AF%E0%B7%94%E0%B6%BD%E0%B6%9A%E0%B7%8A%E0%B7%82%E0%B7%92)%0A%0A10:00+AM+-+Guest+Arrival%0A11:08+AM+-+Auspicious+Poruwa+Ceremony%0A12:30+PM+-+Lunch+Reception%0A03:59+PM+-+Going+Away%0A%0AVenue:+Royal+Chance+Palace+Banquet,+Kalagedihena&location=Royal+Chance+Palace+Banquet,+Kalagedihena" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <i class="ti ti-brand-google" aria-hidden="true"></i> Add to Google Calendar
+          </a>
+
+          <!-- Instant Apple / Outlook iCal Download -->
+          <button class="btn-nav-secondary" id="btn-download-ics" style="font-size: 11.5px; padding: 8px 18px;">
+            <i class="ti ti-calendar" aria-hidden="true"></i> Download Apple / iCal (.ics)
+          </button>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           4. EVENT TIMELINE & AUSPICIOUS TIMES (මංගල නැකත් වේලාවන්)
+           =================================================================== -->
+      <section class="timeline-section" id="timeline" data-aos="fade-up">
+        <div class="kandyan-divider">
+          <span class="divider-icon">
+            <svg class="divider-lotus-svg" viewBox="0 0 24 24">
+              <path d="M12 2C13 6 15 9 12 14C9 9 11 6 12 2Z"/>
+              <path d="M12 14C16 11 19 12 21 16C17 17 14 16 12 14Z"/>
+              <path d="M12 14C8 11 5 12 3 16C7 17 10 16 12 14Z"/>
+            </svg>
+          </span>
+        </div>
+
+        <span class="section-badge">Event Schedule</span>
+        <h2 class="section-title-si">මංගල නැකත් වේලාවන්</h2>
+        <p class="section-title-en">Auspicious Times & Program</p>
+        <p class="section-subtitle">Sacred traditions observed in true Kandyan grace</p>
+
+        <div class="timeline-cards">
+          <!-- 10:00 AM: Start Time / Guest Arrival -->
+          <article class="timeline-card" data-aos="fade-left" data-aos-delay="100">
+            <div class="timeline-badge">
+              <i class="ti ti-door-enter" aria-hidden="true"></i>
+            </div>
+            <div class="timeline-info">
+              <div class="timeline-time-row">
+                <span class="timeline-time">10:00 AM</span>
+                <span class="timeline-auspicious-tag">ආරම්භය</span>
+              </div>
+              <h3 class="timeline-name-si">ආරාධිත අමුත්තන්ගේ පැමිණීම</h3>
+              <p class="timeline-name-en">Guest Arrival & Welcome</p>
+              <p class="timeline-desc">
+                Warm welcome and traditional refreshments as guests gather to share our joyous day.
+              </p>
+            </div>
+          </article>
+
+          <!-- 11:08 AM: Sacred Poruwa Ceremony (නැකත් වේලාව - HIGHLIGHT) -->
+          <article class="timeline-card highlight" data-aos="fade-right" data-aos-delay="200">
+            <div class="timeline-badge">
+              <i class="ti ti-crown" aria-hidden="true"></i>
+            </div>
+            <div class="timeline-info">
+              <div class="timeline-time-row">
+                <span class="timeline-time">11:08 AM</span>
+                <span class="timeline-auspicious-tag" style="font-weight: 700;">සුබ නැකත</span>
+              </div>
+              <h3 class="timeline-name-si">සුබ මුහුර්තියෙන් පෝරුව චාරිත්‍ර</h3>
+              <p class="timeline-name-en">Sacred Poruwa Ceremony</p>
+              <p class="timeline-desc">
+                The traditional Kandyan wedding rituals, chanting of Jayamangala Gatha, exchanging rings, and the sacred tying of the nuptial knot (නූල් බැඳීම).
+              </p>
+            </div>
+          </article>
+
+          <!-- 12:30 PM: Lunch Reception & Fellowship -->
+          <article class="timeline-card" data-aos="fade-left" data-aos-delay="300">
+            <div class="timeline-badge">
+              <i class="ti ti-glass-cocktail" aria-hidden="true"></i>
+            </div>
+            <div class="timeline-info">
+              <div class="timeline-time-row">
+                <span class="timeline-time">12:30 PM</span>
+                <span class="timeline-auspicious-tag">සංග්‍රහය</span>
+              </div>
+              <h3 class="timeline-name-si">මංගල දිවා භෝජන සංග්‍රහය</h3>
+              <p class="timeline-name-en">Lunch Reception & Fellowship</p>
+              <p class="timeline-desc">
+                Festive banquet, cutting of the wedding cake, and celebratory toasts with family and friends.
+              </p>
+            </div>
+          </article>
+
+          <!-- 03:59 PM: Going Away (නැකත් වේලාව) -->
+          <article class="timeline-card highlight" data-aos="fade-right" data-aos-delay="400">
+            <div class="timeline-badge">
+              <i class="ti ti-car" aria-hidden="true"></i>
+            </div>
+            <div class="timeline-info">
+              <div class="timeline-time-row">
+                <span class="timeline-time">03:59 PM</span>
+                <span class="timeline-auspicious-tag" style="font-weight: 700;">සුබ නැකත</span>
+              </div>
+              <h3 class="timeline-name-si">නැකතට පිටත්වීම</h3>
+              <p class="timeline-name-en">Going Away Ceremony</p>
+              <p class="timeline-desc">
+                The bride and groom bid farewell to embark on their new marital journey with parental blessings.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           5. VENUE & LOCATION SECTION (ස්ථානය සහ මඟපෙන්වීම)
+           =================================================================== -->
+      <section class="venue-section" id="venue" data-aos="fade-up">
+        <div class="kandyan-divider">
+          <span class="divider-icon">
+            <svg class="divider-lotus-svg" viewBox="0 0 24 24">
+              <path d="M12 2C13 6 15 9 12 14C9 9 11 6 12 2Z"/>
+              <path d="M12 14C16 11 19 12 21 16C17 17 14 16 12 14Z"/>
+              <path d="M12 14C8 11 5 12 3 16C7 17 10 16 12 14Z"/>
+            </svg>
+          </span>
+        </div>
+
+        <span class="section-badge">Location & Map</span>
+        <h2 class="section-title-si">මංගල උත්සව ශාලාව</h2>
+        <p class="section-title-en">The Wedding Venue</p>
+        <p class="section-subtitle">We look forward to welcoming you</p>
+
+        <div class="venue-card" data-aos="zoom-in" data-aos-delay="150">
+          <div class="venue-palace-icon">
+            <i class="ti ti-building-castle" aria-hidden="true"></i>
+          </div>
+
+          <h3 class="venue-name-si">රෝයල් චාන්ස් පැලස් බෑන්ක්වට්</h3>
+          <p class="venue-name-en">Royal Chance Palace Banquet</p>
+          <p class="venue-address">
+            Kandy Road, Kalagedihena, Sri Lanka <br/>
+            (කලගෙඩිහේන, නිට්ටඹුව ආසන්නයේ)
+          </p>
+
+          <!-- Interactive Embedded Google Map -->
+          <div class="map-embed-wrapper" data-aos="fade-up" data-aos-delay="250">
+            <iframe 
+              title="Royal Chance Palace Banquet Map"
+              src="https://maps.google.com/maps?q=Royal+Chance+Palace+Banquet+Kalagedihena&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+              loading="lazy" 
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <!-- Navigation Action Buttons -->
+          <div class="venue-actions">
+            <!-- Open in Google Maps -->
+            <a 
+              href="https://www.google.com/maps/search/?api=1&query=Royal+Chance+Palace+Banquet+Kalagedihena" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="btn-nav-primary"
+            >
+              <i class="ti ti-map-2" aria-hidden="true"></i> Open in Google Maps
+            </a>
+
+            <!-- Get Directions Button -->
+            <a 
+              href="https://www.google.com/maps/dir/?api=1&destination=Royal+Chance+Palace+Banquet+Kalagedihena" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="btn-nav-secondary"
+            >
+              <i class="ti ti-navigation" aria-hidden="true"></i> Get Directions
+            </a>
+
+            <!-- Copy Address Button -->
+            <button class="btn-nav-secondary" id="btn-copy-address">
+              <i class="ti ti-copy" aria-hidden="true"></i> Copy Address
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           6. RSVP & DIRECT CONTACT SECTION (සම්බන්ධ කර ගැනීමට & RSVP)
+           =================================================================== -->
+      <section class="rsvp-section" id="rsvp" data-aos="fade-up">
+        <div class="kandyan-divider">
+          <span class="divider-icon">
+            <svg class="divider-lotus-svg" viewBox="0 0 24 24">
+              <path d="M12 2C13 6 15 9 12 14C9 9 11 6 12 2Z"/>
+              <path d="M12 14C16 11 19 12 21 16C17 17 14 16 12 14Z"/>
+              <path d="M12 14C8 11 5 12 3 16C7 17 10 16 12 14Z"/>
+            </svg>
+          </span>
+        </div>
+
+        <span class="section-badge">RSVP & Inquiries</span>
+        <h2 class="section-title-si">ඔබගේ පැමිණීම තහවුරු කරන්න</h2>
+        <p class="section-title-en">Kindly RSVP & Contact Us</p>
+        <p class="section-subtitle">Your gracious presence will complete our joy</p>
+
+        <!-- Direct Contact Action Cards -->
+        <div class="contact-cards-container">
+          <!-- Groom: Chinesh Contact Card -->
+          <div class="contact-card" data-aos="fade-left" data-aos-delay="100">
+            <div class="contact-person-info">
+              <span class="contact-role">Groom • මනාලයා</span>
+              <p class="contact-person-name">චිනේෂ් (Chinesh)</p>
+              <p class="contact-phone-number">+94 77 568 9278</p>
+            </div>
+            <div class="contact-actions">
+              <a href="tel:+94775689278" class="btn-action-icon call" title="Call Chinesh" aria-label="Call Chinesh">
+                <i class="ti ti-phone" aria-hidden="true"></i>
+              </a>
+              <a 
+                href="https://wa.me/94775689278?text=Hello%20Chinesh!%20Regarding%20your%20wedding%20invitation..." 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn-action-icon whatsapp" 
+                title="WhatsApp Chinesh" 
+                aria-label="WhatsApp Chinesh"
+              >
+                <i class="ti ti-brand-whatsapp" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Bride: Dulakshi Contact Card -->
+          <div class="contact-card" data-aos="fade-right" data-aos-delay="200">
+            <div class="contact-person-info">
+              <span class="contact-role">Bride • මනාලිය</span>
+              <p class="contact-person-name">දුලක්ෂි (Dulakshi)</p>
+              <p class="contact-phone-number">+94 74 412 8583</p>
+            </div>
+            <div class="contact-actions">
+              <a href="tel:+94744128583" class="btn-action-icon call" title="Call Dulakshi" aria-label="Call Dulakshi">
+                <i class="ti ti-phone" aria-hidden="true"></i>
+              </a>
+              <a 
+                href="https://wa.me/94744128583?text=Hello%20Dulakshi!%20Regarding%20your%20wedding%20invitation..." 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn-action-icon whatsapp" 
+                title="WhatsApp Dulakshi" 
+                aria-label="WhatsApp Dulakshi"
+              >
+                <i class="ti ti-brand-whatsapp" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive RSVP Form Box -->
+        <div class="rsvp-form-card" id="rsvp-form-wrap" data-aos="zoom-in" data-aos-delay="250">
+          <form id="rsvp-form" onsubmit="return false;">
+            <div class="form-group">
+              <label class="form-label" for="rsvp-name">
+                Full Name / ඔබගේ නම <span>*</span>
+              </label>
+              <input 
+                class="form-input" 
+                type="text" 
+                id="rsvp-name" 
+                placeholder="e.g. Mr. & Mrs. Silva" 
+                required 
+              />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="rsvp-attending">
+                  Attending / සහභාගීත්වය
+                </label>
+                <select class="form-select" id="rsvp-attending">
+                  <option value="Yes, joyfully attending">Yes, Joyfully Attending (පැමිණෙමු)</option>
+                  <option value="Regretfully unable to attend">Regretfully Unable to Attend (නොපැමිණෙමු)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="rsvp-guests">
+                  Number of Guests
+                </label>
+                <select class="form-select" id="rsvp-guests">
+                  <option value="1">1 Person</option>
+                  <option value="2" selected>2 Persons</option>
+                  <option value="3">3 Persons</option>
+                  <option value="4">4 Persons</option>
+                  <option value="5+">5+ Persons</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="rsvp-msg">
+                Message & Warm Wishes / සුබ පැතුම්
+              </label>
+              <textarea 
+                class="form-textarea" 
+                id="rsvp-msg" 
+                rows="2" 
+                placeholder="A blessing for Chinesh & Dulakshi..."
+              ></textarea>
+            </div>
+
+            <p class="rsvp-deadline-text">
+              ✦ Please respond by 25th of November, 2026 ✦
+            </p>
+
+            <button type="button" class="btn-submit-rsvp" id="submit-rsvp-btn">
+              <i class="ti ti-send" aria-hidden="true"></i> Confirm RSVP
+            </button>
+
+            <!-- Quick WhatsApp RSVP Option -->
+            <p class="rsvp-whatsapp-alt">
+              Or prefer WhatsApp? 
+              <a href="#" id="rsvp-whatsapp-btn">Send confirmation via WhatsApp</a>
+            </p>
+          </form>
+        </div>
+
+        <!-- RSVP Success Confirmation Card -->
+        <div class="rsvp-success-card" id="rsvp-success" role="alert">
+          <span class="success-icon">🪷</span>
+          <h3 class="success-title">බොහොම ස්තූතියි!</h3>
+          <p class="success-desc">
+            Thank you for confirming your response! <br/>
+            We joyfully anticipate celebrating our special day with you.
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           7. FOOTER SECTION (කෘතඥතාවය & ප්‍රාර්ථනා)
+           =================================================================== -->
+      <footer class="invitation-footer">
+        <!-- Background Lotus Watermark SVG -->
+        <svg class="footer-watermark" viewBox="0 0 200 200" fill="#D4AF37">
+          <circle cx="100" cy="100" r="90" stroke="#D4AF37" stroke-width="2" fill="none" opacity="0.3"/>
+          <g opacity="0.4">
+            <ellipse cx="100" cy="40" rx="14" ry="32"/>
+            <ellipse cx="100" cy="160" rx="14" ry="32"/>
+            <ellipse cx="40" cy="100" rx="32" ry="14"/>
+            <ellipse cx="160" cy="100" rx="32" ry="14"/>
+            <ellipse cx="60" cy="60" rx="14" ry="28" transform="rotate(-45 60 60)"/>
+            <ellipse cx="140" cy="140" rx="14" ry="28" transform="rotate(-45 140 140)"/>
+            <ellipse cx="140" cy="60" rx="14" ry="28" transform="rotate(45 140 60)"/>
+            <ellipse cx="60" cy="140" rx="14" ry="28" transform="rotate(45 60 140)"/>
+          </g>
+          <circle cx="100" cy="100" r="20" fill="#D4AF37"/>
+        </svg>
+
+        <p class="footer-blessing-si">✦ දෙවි පිහිටයි • දළදා සමිඳු පිහිටයි ✦</p>
+        <h2 class="footer-title">Thank You</h2>
+        <p class="footer-gratitude">
+          For being a cherished part of our lives and for showering your love and blessings upon us as we begin this sacred lifelong journey.
+        </p>
+
+        <p class="footer-couple-si">චිනේෂ් සහ දුලක්ෂි</p>
+        <p class="footer-couple-en">Chinesh & Dulakshi</p>
+
+        <p class="footer-credit">
+          07.12.2026 • Royal Chance Palace Banquet
+        </p>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-notification" class="toast-msg" role="status" aria-live="polite"></div>
+
+  <!-- Main JavaScript Application Module -->
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
