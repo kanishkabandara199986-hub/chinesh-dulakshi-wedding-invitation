@@ -793,10 +793,11 @@ body.inv-wrap::before {
 
 .venue-name-en {
   font-family: var(--font-english-display);
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 19px;
+  font-weight: 700;
   letter-spacing: 1.5px;
-  color: var(--gold-dark);
+  text-transform: uppercase;
+  color: var(--maroon-royal);
   margin-top: 0.3rem;
 }
 

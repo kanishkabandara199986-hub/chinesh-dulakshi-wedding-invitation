@@ -404,8 +404,8 @@ document.addEventListener('DOMContentLoaded', () => {
         `✨ Looking forward to December 7th, 2026!`
       );
 
-      // Send to Chinesh (+94 77 568 9278)
-      window.open(`https://wa.me/94775689278?text=${text}`, '_blank');
+      // Send to WhatsApp (+94 71 165 2393)
+      window.open(`https://wa.me/94711652393?text=${text}`, '_blank');
     });
   }
 });
