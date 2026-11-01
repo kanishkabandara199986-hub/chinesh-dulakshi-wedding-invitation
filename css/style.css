@@ -334,38 +334,321 @@ body.inv-wrap::before {
   margin-top: 0.4rem;
 }
 
-/* Royal Couple Artwork Card */
-.couple-art-container {
+/* ==========================================================================
+   ROYAL ARCHED COUPLE PORTRAIT & LUXURY WEDDING FRAME
+   ========================================================================== */
+.couple-portrait-wrapper {
   position: relative;
-  width: 230px;
-  height: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 1.2rem auto 1.4rem;
-  border-radius: 50%;
-  padding: 6px;
-  background: var(--gold-gradient);
-  box-shadow: 0 12px 35px rgba(91, 14, 27, 0.2), 0 0 30px rgba(212, 175, 55, 0.25);
+  width: 100%;
+  max-width: 320px;
 }
 
-.couple-art-frame {
+/* Top Regal Crown Crest */
+.portrait-crown-crest {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: -11px;
+  z-index: 5;
+  filter: drop-shadow(0 3px 6px rgba(91, 14, 27, 0.25));
+  transition: transform 0.4s ease;
+}
+
+.crown-crest-svg {
+  width: 76px;
+  height: 30px;
+  overflow: visible;
+}
+
+.couple-portrait-wrapper:hover .portrait-crown-crest {
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Main Arched Frame: Royal Cathedral / Palace Arch */
+.couple-portrait-frame {
+  position: relative;
+  width: 290px;
+  height: 380px;
+  border-radius: 145px 145px 22px 22px;
+  padding: 7px;
+  /* Multi-tone 24k Gold Foil Metallic Gradient */
+  background: linear-gradient(135deg, #FFE89C 0%, #D4AF37 25%, #9B6C1A 50%, #F5E7B2 75%, #C59B27 100%);
+  box-shadow: 
+    0 18px 45px rgba(91, 14, 27, 0.22),
+    0 4px 15px rgba(212, 175, 55, 0.35),
+    0 0 30px rgba(212, 175, 55, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8),
+    inset 0 -1px 2px rgba(91, 14, 27, 0.4);
+  cursor: pointer;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease;
+  user-select: none;
+}
+
+.couple-portrait-frame:hover {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 
+    0 24px 55px rgba(91, 14, 27, 0.28),
+    0 8px 25px rgba(212, 175, 55, 0.45),
+    0 0 40px rgba(245, 231, 178, 0.35),
+    inset 0 1px 3px rgba(255, 255, 255, 0.9);
+}
+
+/* Inner Ivory Bevel & Secondary Inlaid Gold Fillet */
+.couple-portrait-inner {
+  position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: 138px 138px 15px 15px;
   overflow: hidden;
-  border: 3px solid #FFFDF9;
-  position: relative;
   background: #FFFDF9;
+  border: 2.5px solid #FFFDF9;
+  box-shadow: 
+    inset 0 0 0 1.5px rgba(184, 134, 11, 0.6),
+    inset 0 0 20px rgba(91, 14, 27, 0.12);
 }
 
-.couple-art-img {
+/* The Couple Photograph */
+.couple-portrait-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.03);
-  transition: transform 0.5s ease;
+  object-position: center 20%;
+  display: block;
+  transform: scale(1.01);
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease;
 }
 
-.couple-art-container:hover .couple-art-img {
-  transform: scale(1.08);
+.couple-portrait-frame:hover .couple-portrait-img {
+  transform: scale(1.06);
+  filter: brightness(1.03) contrast(1.02);
+}
+
+/* Inner Soft Vignette & Royal Lighting Sheen */
+.frame-inner-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 30%, transparent 60%, rgba(91, 14, 27, 0.16) 100%);
+  box-shadow: inset 0 0 18px rgba(91, 14, 27, 0.2);
+}
+
+/* Dynamic Glint / Light Shimmer Across Frame */
+.frame-light-shimmer {
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(
+    115deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 62%
+  );
+  transform: rotate(-20deg) translateX(-100%);
+  animation: frameShimmerSweep 7s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes frameShimmerSweep {
+  0% { transform: rotate(-20deg) translateX(-120%); }
+  25%, 100% { transform: rotate(-20deg) translateX(120%); }
+}
+
+/* Bottom Corner Ornate Motifs */
+.frame-corner {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 4;
+  filter: drop-shadow(0 2px 4px rgba(91, 14, 27, 0.3));
+}
+
+.frame-corner.corner-bl {
+  bottom: 5px;
+  left: 5px;
+}
+
+.frame-corner.corner-br {
+  bottom: 5px;
+  right: 5px;
+}
+
+/* Tap to Zoom Badge */
+.tap-zoom-hint {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background: rgba(91, 14, 27, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #FFFDF9;
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.88;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+  z-index: 5;
+}
+
+.tap-zoom-hint i {
+  font-size: 13px;
+  color: var(--gold-bright);
+}
+
+.couple-portrait-frame:hover .tap-zoom-hint {
+  opacity: 1;
+  transform: translateY(-2px);
+  background: rgba(91, 14, 27, 0.95);
+  border-color: var(--gold-primary);
+}
+
+/* Romantic Caption Ribbon */
+.couple-portrait-caption {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 0.9rem;
+  padding: 6px 20px;
+  background: linear-gradient(135deg, rgba(255, 253, 249, 0.95), rgba(247, 241, 229, 0.95));
+  border: 1px solid var(--border-gold-medium);
+  border-radius: 24px;
+  box-shadow: 0 4px 15px rgba(91, 14, 27, 0.06), 0 0 10px rgba(212, 175, 55, 0.15);
+  backdrop-filter: blur(4px);
+}
+
+.caption-star {
+  color: var(--gold-primary);
+  font-size: 11px;
+}
+
+.caption-text-en {
+  font-family: var(--font-english-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+/* Lightbox Modal Styles */
+.portrait-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  padding: 1.5rem;
+}
+
+.portrait-modal.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.portrait-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 5, 10, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.portrait-modal-content {
+  position: relative;
+  z-index: 2;
+  max-width: 440px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: modalScaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalScaleUp {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.portrait-modal-close {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 253, 249, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  color: #FFFDF9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.portrait-modal-close:hover {
+  background: var(--maroon-royal);
+  transform: rotate(90deg);
+  border-color: var(--gold-primary);
+}
+
+.modal-frame {
+  width: 100%;
+  border-radius: 16px;
+  padding: 8px;
+  background: linear-gradient(135deg, #FFE89C, #D4AF37, #9B6C1A, #F5E7B2);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 35px rgba(212, 175, 55, 0.3);
+}
+
+.modal-couple-img {
+  width: 100%;
+  height: auto;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 10px;
+  display: block;
+  background: #110204;
+}
+
+.modal-caption-bar {
+  text-align: center;
+  padding: 0.8rem 0.5rem 0.3rem;
+  color: #FFFDF9;
+}
+
+.modal-couple-names {
+  font-family: var(--font-sinhala-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFDF9;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.modal-wedding-date {
+  font-family: var(--font-english-display);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--gold-bright);
+  margin-top: 2px;
 }
 
 /* Royal Wedding Date Tag */
@@ -940,10 +1223,25 @@ body.inv-wrap::before {
 
 .contact-phone-number {
   font-family: var(--font-sans);
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 500;
-  margin-top: 1px;
+  font-size: 13.5px;
+  color: var(--maroon-royal);
+  font-weight: 600;
+  margin-top: 3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-phone-number:hover {
+  color: var(--gold-dark);
+  text-decoration: underline;
+}
+
+.contact-phone-number i {
+  font-size: 14px;
+  color: var(--gold-warm);
 }
 
 .contact-actions {
@@ -1090,19 +1388,57 @@ body.inv-wrap::before {
   box-shadow: 0 8px 24px rgba(91, 14, 27, 0.35);
 }
 
-.rsvp-whatsapp-alt {
-  display: block;
+.rsvp-whatsapp-box {
+  margin-top: 1.1rem;
+  padding-top: 0.9rem;
+  border-top: 1px dashed rgba(212, 175, 55, 0.4);
   text-align: center;
-  margin-top: 0.9rem;
+}
+
+.rsvp-whatsapp-heading {
   font-family: var(--font-sans);
   font-size: 11.5px;
   color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 9px;
+  text-transform: uppercase;
 }
 
-.rsvp-whatsapp-alt a {
-  color: #128C7E;
+.rsvp-whatsapp-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn-rsvp-wa {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #25D366;
+  color: #FFFFFF;
+  padding: 9px 12px;
+  border-radius: 20px;
+  font-family: var(--font-sans);
+  font-size: 12px;
   font-weight: 600;
-  text-decoration: underline;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  box-shadow: 0 3px 10px rgba(37, 211, 102, 0.25);
+  transition: all 0.25s ease;
+}
+
+.btn-rsvp-wa:hover {
+  background: #1EBE5D;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(37, 211, 102, 0.35);
+  color: #FFFFFF;
+}
+
+.btn-rsvp-wa i {
+  font-size: 16px;
 }
 
 .rsvp-success-card {
@@ -1242,9 +1578,27 @@ body.inv-wrap::before {
 }
 
 /* --- RESPONSIVENESS --- */
+@media (max-width: 480px) {
+  .couple-portrait-frame {
+    width: 270px;
+    height: 355px;
+    border-radius: 135px 135px 20px 20px;
+  }
+  .couple-portrait-inner {
+    border-radius: 128px 128px 14px 14px;
+  }
+}
+
 @media (max-width: 360px) {
   .couple-names-si { font-size: 34px; }
-  .couple-art-container { width: 190px; height: 190px; }
+  .couple-portrait-frame {
+    width: 240px;
+    height: 320px;
+    border-radius: 120px 120px 16px 16px;
+  }
+  .couple-portrait-inner {
+    border-radius: 114px 114px 12px 12px;
+  }
   .cd-num { font-size: 24px; }
   .cd-box { padding: 10px 4px 6px; }
 }

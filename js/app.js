@@ -143,43 +143,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const playMusic = () => {
+    if (bgMusic) {
+      const playPromise = bgMusic.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            if (musicToggle) musicToggle.classList.add('playing');
+            if (musicIcon) musicIcon.className = 'ti ti-volume';
+            isPlaying = true;
+          })
+          .catch(() => {
+            startAmbientSynth();
+            if (musicToggle) musicToggle.classList.add('playing');
+            if (musicIcon) musicIcon.className = 'ti ti-volume';
+            isPlaying = true;
+          });
+      }
+    } else {
+      startAmbientSynth();
+      if (musicToggle) musicToggle.classList.add('playing');
+      if (musicIcon) musicIcon.className = 'ti ti-volume';
+      isPlaying = true;
+    }
+  };
+
+  const pauseMusic = () => {
+    if (bgMusic) bgMusic.pause();
+    stopAmbientSynth();
+    if (musicToggle) musicToggle.classList.remove('playing');
+    if (musicIcon) musicIcon.className = 'ti ti-volume-off';
+    isPlaying = false;
+  };
+
   if (musicToggle) {
     musicToggle.addEventListener('click', () => {
       if (isPlaying) {
-        if (bgMusic) bgMusic.pause();
-        stopAmbientSynth();
-        musicToggle.classList.remove('playing');
-        if (musicIcon) {
-          musicIcon.className = 'ti ti-volume-off';
-        }
-        isPlaying = false;
+        pauseMusic();
       } else {
-        if (bgMusic && bgMusic.src) {
-          const playPromise = bgMusic.play();
-          if (playPromise !== undefined) {
-            playPromise
-              .then(() => {
-                musicToggle.classList.add('playing');
-                if (musicIcon) musicIcon.className = 'ti ti-volume';
-                isPlaying = true;
-              })
-              .catch(() => {
-                // If local audio file is missing or blocked, start ambient harmonic synth
-                startAmbientSynth();
-                musicToggle.classList.add('playing');
-                if (musicIcon) musicIcon.className = 'ti ti-volume';
-                isPlaying = true;
-              });
-          }
-        } else {
-          startAmbientSynth();
-          musicToggle.classList.add('playing');
-          if (musicIcon) musicIcon.className = 'ti ti-volume';
-          isPlaying = true;
-        }
+        playMusic();
       }
     });
   }
+
+  // Smooth play on first user interaction with the page
+  const tryAutoPlayOnInteraction = () => {
+    if (!isPlaying) {
+      playMusic();
+    }
+    document.removeEventListener('click', tryAutoPlayOnInteraction);
+    document.removeEventListener('touchstart', tryAutoPlayOnInteraction);
+  };
+  document.addEventListener('click', tryAutoPlayOnInteraction, { once: true });
+  document.addEventListener('touchstart', tryAutoPlayOnInteraction, { once: true });
 
   // ---------------------------------------------------------------------------
   // 5. Golden Ripple Effect on Screen Interaction
@@ -386,26 +402,213 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Quick WhatsApp RSVP Option Handler
-  if (rsvpWhatsappBtn) {
-    rsvpWhatsappBtn.addEventListener('click', (e) => {
+  // ---------------------------------------------------------------------------
+  // 9. Quick WhatsApp RSVP Option Handlers (Chinesh & Dulakshi)
+  // ---------------------------------------------------------------------------
+  const sendWhatsAppRSVP = (phone) => {
+    const name = document.getElementById('rsvp-name') ? document.getElementById('rsvp-name').value.trim() : '';
+    const guestName = name || 'Guest';
+    const attending = document.getElementById('rsvp-attending') ? document.getElementById('rsvp-attending').value : 'Yes, joyfully attending';
+    const guests = document.getElementById('rsvp-guests') ? document.getElementById('rsvp-guests').value : '2';
+    const message = document.getElementById('rsvp-msg') ? document.getElementById('rsvp-msg').value.trim() : '';
+
+    const text = encodeURIComponent(
+      `*Wedding RSVP - Chinesh & Dulakshi*\n` +
+      `👤 *Name:* ${guestName}\n` +
+      `💌 *Attending:* ${attending}\n` +
+      `👥 *Guests:* ${guests}\n` +
+      (message ? `💬 *Wishes:* ${message}\n` : '') +
+      `✨ Looking forward to December 7th, 2026!`
+    );
+
+    window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+  };
+
+  const rsvpWaChinesh = document.getElementById('rsvp-whatsapp-chinesh');
+  const rsvpWaDulakshi = document.getElementById('rsvp-whatsapp-dulakshi');
+
+  if (rsvpWaChinesh) {
+    rsvpWaChinesh.addEventListener('click', (e) => {
       e.preventDefault();
-      const name = document.getElementById('rsvp-name').value.trim() || 'Guest';
-      const attending = document.getElementById('rsvp-attending').value;
-      const guests = document.getElementById('rsvp-guests').value;
-      const message = document.getElementById('rsvp-msg').value.trim();
-
-      const text = encodeURIComponent(
-        `*Wedding RSVP - Chinesh & Dulakshi*\n` +
-        `👤 *Name:* ${name}\n` +
-        `💌 *Attending:* ${attending}\n` +
-        `👥 *Guests:* ${guests}\n` +
-        (message ? `💬 *Wishes:* ${message}\n` : '') +
-        `✨ Looking forward to December 7th, 2026!`
-      );
-
-      // Send to WhatsApp (+94 71 165 2393)
-      window.open(`https://wa.me/94711652393?text=${text}`, '_blank');
+      sendWhatsAppRSVP('94775689278');
     });
+  }
+
+  if (rsvpWaDulakshi) {
+    rsvpWaDulakshi.addEventListener('click', (e) => {
+      e.preventDefault();
+      sendWhatsAppRSVP('94711652393');
+    });
+  }
+
+  // ---------------------------------------------------------------------------
+  // 10. Couple Portrait Lightbox Modal
+  // ---------------------------------------------------------------------------
+  const portraitFrame = document.getElementById('couple-portrait-frame');
+  const portraitModal = document.getElementById('portrait-modal');
+  const modalClose = document.getElementById('modal-close');
+  const modalBackdrop = document.getElementById('modal-backdrop');
+
+  const openPortraitModal = () => {
+    if (portraitModal) {
+      portraitModal.classList.add('is-active');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  const closePortraitModal = () => {
+    if (portraitModal) {
+      portraitModal.classList.remove('is-active');
+      document.body.style.overflow = '';
+    }
+  };
+
+  if (portraitFrame) {
+    portraitFrame.addEventListener('click', openPortraitModal);
+    portraitFrame.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openPortraitModal();
+      }
+    });
+  }
+
+  if (modalClose) modalClose.addEventListener('click', closePortraitModal);
+  if (modalBackdrop) modalBackdrop.addEventListener('click', closePortraitModal);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && portraitModal && portraitModal.classList.contains('is-active')) {
+      closePortraitModal();
+    }
+  });
+
+  // ---------------------------------------------------------------------------
+  // 11. Romantic Floating Flower Petals Canvas Animation
+  // ---------------------------------------------------------------------------
+  const petalsCanvas = document.getElementById('floating-petals-canvas');
+  if (petalsCanvas) {
+    const ctx = petalsCanvas.getContext('2d');
+    let width = (petalsCanvas.width = window.innerWidth);
+    let height = (petalsCanvas.height = window.innerHeight);
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        width = petalsCanvas.width = window.innerWidth;
+        height = petalsCanvas.height = window.innerHeight;
+      }, 100);
+    });
+
+    const isMobile = window.innerWidth < 600;
+    const petalCount = isMobile ? 22 : 36;
+    const petals = [];
+
+    // Wedding floral color palettes (Soft Lotus pinks, warm gold shimmer, and water-lily white)
+    const palettes = [
+      { base: '#FFF2F5', mid: '#F8B6C8', edge: '#E87D9A', shadow: 'rgba(232, 125, 154, 0.22)' },
+      { base: '#FFF5F8', mid: '#F5A3B8', edge: '#D9587D', shadow: 'rgba(217, 88, 125, 0.2)' },
+      { base: '#FFFDF6', mid: '#F5E29E', edge: '#D4AF37', shadow: 'rgba(212, 175, 55, 0.22)' },
+      { base: '#FFFFFF', mid: '#FBF6EE', edge: '#EADBC3', shadow: 'rgba(200, 180, 150, 0.15)' }
+    ];
+
+    class FloatingPetal {
+      constructor(isInitial = false) {
+        this.reset(isInitial);
+      }
+
+      reset(isInitial = false) {
+        this.x = Math.random() * width;
+        this.y = isInitial ? Math.random() * height : -30 - Math.random() * 40;
+        this.size = 14 + Math.random() * 14;
+        this.widthRatio = 0.52 + Math.random() * 0.24;
+        this.palette = palettes[Math.floor(Math.random() * palettes.length)];
+
+        this.speedY = 0.7 + Math.random() * 1.3;
+        this.swayAngle = Math.random() * Math.PI * 2;
+        this.swaySpeed = 0.015 + Math.random() * 0.02;
+        this.swayRadius = 0.6 + Math.random() * 1.2;
+
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+
+        // 3D tumble flip
+        this.flip = Math.random() * Math.PI * 2;
+        this.flipSpeed = 0.02 + Math.random() * 0.035;
+
+        this.opacity = 0.45 + Math.random() * 0.4;
+      }
+
+      update() {
+        this.y += this.speedY;
+        this.swayAngle += this.swaySpeed;
+        this.x += Math.sin(this.swayAngle) * this.swayRadius;
+
+        this.rotation += this.rotationSpeed;
+        this.flip += this.flipSpeed;
+
+        if (this.y > height + 40 || this.x < -40 || this.x > width + 40) {
+          this.reset(false);
+        }
+      }
+
+      draw(c) {
+        c.save();
+        c.translate(this.x, this.y);
+        c.rotate(this.rotation);
+
+        // 3D perspective tumbling (cos flip)
+        const scaleX = Math.cos(this.flip);
+        c.scale(scaleX, 1);
+
+        const h = this.size;
+        const w = this.size * this.widthRatio;
+
+        // Draw organic petal silhouette
+        c.beginPath();
+        c.moveTo(0, -h / 2); // tip
+        c.bezierCurveTo(w, -h / 4, w, h / 3, 0, h / 2); // right side to base
+        c.bezierCurveTo(-w, h / 3, -w, -h / 4, 0, -h / 2); // left side to tip
+        c.closePath();
+
+        // Shading gradient
+        const grad = c.createLinearGradient(0, -h / 2, 0, h / 2);
+        grad.addColorStop(0, this.palette.edge);
+        grad.addColorStop(0.35, this.palette.mid);
+        grad.addColorStop(1, this.palette.base);
+
+        c.fillStyle = grad;
+        c.globalAlpha = this.opacity;
+        c.shadowColor = this.palette.shadow;
+        c.shadowBlur = 4;
+        c.fill();
+
+        // Center delicate petal vein
+        c.beginPath();
+        c.moveTo(0, h / 2);
+        c.quadraticCurveTo(w * 0.08, 0, 0, -h * 0.35);
+        c.strokeStyle = this.palette.edge;
+        c.globalAlpha = this.opacity * 0.35;
+        c.lineWidth = 0.6;
+        c.stroke();
+
+        c.restore();
+      }
+    }
+
+    for (let i = 0; i < petalCount; i++) {
+      petals.push(new FloatingPetal(true));
+    }
+
+    const renderPetals = () => {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < petals.length; i++) {
+        petals[i].update();
+        petals[i].draw(ctx);
+      }
+      requestAnimationFrame(renderPetals);
+    };
+
+    renderPetals();
   }
 });

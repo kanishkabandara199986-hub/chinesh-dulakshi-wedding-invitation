@@ -35,11 +35,14 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
   <!-- Custom Stylesheets -->
-  <link rel="stylesheet" href="/css/style.css" />
-  <link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/animations.css" />
 </head>
 
 <body class="inv-wrap">
+  <!-- Interactive Floating Petals Canvas Animation -->
+  <canvas id="floating-petals-canvas" class="floating-petals-canvas" aria-hidden="true"></canvas>
+
   <!-- Custom Golden Blossom Cursor for Desktop -->
   <div class="custom-cursor" aria-hidden="true">✨</div>
 
@@ -77,6 +80,33 @@
     </div>
   </div>
 
+  <script>
+    // Fallback reveal if opened as local file (file://) or if ES module is delayed
+    (function() {
+      function reveal() {
+        var loader = document.getElementById('loading-screen');
+        var main = document.getElementById('main-content');
+        if (loader && loader.style.display !== 'none' && (!main || main.style.visibility === 'hidden' || main.style.opacity === '0')) {
+          loader.style.opacity = '0';
+          loader.style.pointerEvents = 'none';
+          setTimeout(function() {
+            loader.style.display = 'none';
+            if (main) {
+              main.style.opacity = '1';
+              main.style.visibility = 'visible';
+            }
+          }, 600);
+        }
+      }
+      if (window.location.protocol === 'file:') {
+        window.addEventListener('DOMContentLoaded', function() {
+          setTimeout(reveal, 600);
+        });
+      }
+      setTimeout(reveal, 2500);
+    })();
+  </script>
+
   <!-- Floating System Controls -->
   <aside class="floating-controls" aria-label="Quick Actions">
     <!-- Music Player Toggle -->
@@ -85,8 +115,8 @@
     </button>
   </aside>
 
-  <audio id="bg-music" loop preload="none">
-    <source src="/assets/audio/wedding.mp3" type="audio/mpeg" />
+  <audio id="bg-music" loop preload="auto" src="./audio/background-music.mp3">
+    <source src="./audio/background-music.mp3" type="audio/mpeg" />
   </audio>
 
   <!-- Mobile Shell Container -->
@@ -126,15 +156,83 @@
           <p class="couple-names-en">Chinesh & Dulakshi</p>
         </div>
 
-        <!-- Royal Kandyan Couple Illustration Card -->
-        <div class="couple-art-container" data-aos="zoom-in" data-aos-delay="400">
-          <div class="couple-art-frame">
-            <img 
-              src="/images/kandyan_couple.jpg" 
-              alt="Chinesh & Dulakshi - Traditional Kandyan Wedding Illustration" 
-              class="couple-art-img"
-              loading="eager"
-            />
+        <!-- Royal Couple Portrait in Luxury Arched Frame -->
+        <div class="couple-portrait-wrapper" data-aos="zoom-in" data-aos-delay="400">
+          <!-- Top Regal Crown Ornament -->
+          <div class="portrait-crown-crest" aria-hidden="true">
+            <svg viewBox="0 0 80 32" fill="none" class="crown-crest-svg">
+              <!-- Central Lotus & Jewels -->
+              <path d="M40 2 C42 10 48 15 40 26 C32 15 38 10 40 2 Z" fill="url(#goldSheen)" stroke="#996515" stroke-width="0.5"/>
+              <path d="M40 12 C44 18 52 18 56 26 C48 24 44 20 40 12 Z" fill="url(#goldSheen)" stroke="#996515" stroke-width="0.5"/>
+              <path d="M40 12 C36 18 28 18 24 26 C32 24 36 20 40 12 Z" fill="url(#goldSheen)" stroke="#996515" stroke-width="0.5"/>
+              <path d="M54 18 C58 20 66 22 70 28 C62 27 58 24 54 18 Z" fill="url(#goldSheen)" stroke="#996515" stroke-width="0.5"/>
+              <path d="M26 18 C22 20 14 22 10 28 C18 27 22 24 26 18 Z" fill="url(#goldSheen)" stroke="#996515" stroke-width="0.5"/>
+              <!-- Crown Base Arch -->
+              <path d="M8 29 Q40 23 72 29" stroke="#D4AF37" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M14 31 Q40 26 66 31" stroke="#AA7A1E" stroke-width="1" stroke-linecap="round"/>
+              <!-- Crown Pearls -->
+              <circle cx="40" cy="4" r="2.5" fill="#FFFDF9" stroke="#996515" stroke-width="0.8"/>
+              <circle cx="56" cy="18" r="1.8" fill="#FFFDF9" stroke="#996515" stroke-width="0.6"/>
+              <circle cx="24" cy="18" r="1.8" fill="#FFFDF9" stroke="#996515" stroke-width="0.6"/>
+              <circle cx="70" cy="26" r="1.5" fill="#FFFDF9" stroke="#996515" stroke-width="0.5"/>
+              <circle cx="10" cy="26" r="1.5" fill="#FFFDF9" stroke="#996515" stroke-width="0.5"/>
+              <defs>
+                <linearGradient id="goldSheen" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FFE89C"/>
+                  <stop offset="50%" stop-color="#D4AF37"/>
+                  <stop offset="100%" stop-color="#8F6616"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <!-- Main Royal Arched Frame -->
+          <div class="couple-portrait-frame" id="couple-portrait-frame" role="button" tabindex="0" title="Click to view full portrait" aria-label="View portrait of Chinesh & Dulakshi">
+            <div class="couple-portrait-inner">
+              <img 
+                src="./images/couple.jpg" 
+                alt="Chinesh & Dulakshi - Wedding Portrait" 
+                class="couple-portrait-img" 
+                id="couple-photo"
+                loading="eager"
+              />
+              <!-- Subtle Inner Glow & Frame Highlight -->
+              <div class="frame-inner-sheen" aria-hidden="true"></div>
+              <div class="frame-light-shimmer" aria-hidden="true"></div>
+            </div>
+
+            <!-- Bottom Left Traditional Filigree Corner -->
+            <svg class="frame-corner corner-bl" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <path d="M4 36 L4 18 C4 18 10 26 18 26 C26 26 34 32 36 36 L18 36 Z" fill="url(#goldCornerGrad)" opacity="0.85"/>
+              <path d="M6 34 Q6 22 18 22 Q18 34 6 34 Z" stroke="#D4AF37" stroke-width="1.2" fill="none"/>
+              <circle cx="14" cy="28" r="1.5" fill="#FFE89C"/>
+            </svg>
+
+            <!-- Bottom Right Traditional Filigree Corner -->
+            <svg class="frame-corner corner-br" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <path d="M36 36 L36 18 C36 18 30 26 22 26 C14 26 6 32 4 36 L22 36 Z" fill="url(#goldCornerGrad)" opacity="0.85"/>
+              <path d="M34 34 Q34 22 22 22 Q22 34 34 34 Z" stroke="#D4AF37" stroke-width="1.2" fill="none"/>
+              <circle cx="26" cy="28" r="1.5" fill="#FFE89C"/>
+              <defs>
+                <linearGradient id="goldCornerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FFE58F"/>
+                  <stop offset="50%" stop-color="#D4AF37"/>
+                  <stop offset="100%" stop-color="#7A5412"/>
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <!-- Quick tap zoom hint badge -->
+            <span class="tap-zoom-hint" aria-hidden="true">
+              <i class="ti ti-zoom-in"></i> View
+            </span>
+          </div>
+
+          <!-- Auspicious Tag / Ribbon below portrait -->
+          <div class="couple-portrait-caption">
+            <span class="caption-star">✦</span>
+            <span class="caption-text-en">Forever In Love</span>
+            <span class="caption-star">✦</span>
           </div>
         </div>
 
@@ -196,26 +294,8 @@
             With the graceful blessings of the Noble Triple Gem and together with our respected families, we cordially invite you to grace the sacred union of
           </p>
 
-          <!-- Bride's Family Block -->
-          <div class="family-block" data-aos="fade-left" data-aos-delay="250">
-            <span class="family-title">Bride's Parents</span>
-            <p class="family-parents">
-              වයි. ඒ. ධර්මදාස යාපා මහතා සහ <br/>
-              ඒ. එම්. ශ්‍රීමා ලක්මාලි මහත්මිය
-            </p>
-            <p class="family-parents-en">
-              Daughter of Mrs. A.M. Shrima Lakmali & Mr. Y.A. Dharmadasa Yapa
-            </p>
-            <p class="family-relation">
-              Daughter • දුලක්ෂි (Dulakshi)
-            </p>
-          </div>
-
-          <!-- Connecting Floral Symbol -->
-          <div style="color: var(--gold-primary); font-size: 16px; margin: 0.4rem 0;">❦</div>
-
           <!-- Groom's Family Block -->
-          <div class="family-block" data-aos="fade-right" data-aos-delay="350">
+          <div class="family-block" data-aos="fade-right" data-aos-delay="250">
             <span class="family-title">Groom's Parents</span>
             <p class="family-parents">
               ජී. ලයනල් පෙරේරා මහතා සහ <br/>
@@ -226,6 +306,24 @@
             </p>
             <p class="family-relation">
               Son • චිනේෂ් (Chinesh)
+            </p>
+          </div>
+
+          <!-- Connecting Floral Symbol -->
+          <div style="color: var(--gold-primary); font-size: 16px; margin: 0.4rem 0;">❦</div>
+
+          <!-- Bride's Family Block -->
+          <div class="family-block" data-aos="fade-left" data-aos-delay="350">
+            <span class="family-title">Bride's Parents</span>
+            <p class="family-parents">
+              වයි. ඒ. ධර්මදාස යාපා මහතා සහ <br/>
+              ඒ. එම්. ශ්‍රීමා ලක්මාලි මහත්මිය
+            </p>
+            <p class="family-parents-en">
+              Daughter of Mrs. A.M. Shrima Lakmali & Mr. Y.A. Dharmadasa Yapa
+            </p>
+            <p class="family-relation">
+              Daughter • දුලක්ෂි (Dulakshi)
             </p>
           </div>
 
@@ -326,7 +424,7 @@
               <h3 class="timeline-name-si">සුබ මුහුර්තියෙන් පෝරුව චාරිත්‍ර</h3>
               <p class="timeline-name-en">Sacred Poruwa Ceremony</p>
               <p class="timeline-desc">
-                The traditional Kandyan wedding rituals, chanting of Jayamangala Gatha, exchanging rings, and the sacred tying of the nuptial knot (නූල් බැඳීම).
+                The traditional Kandyan wedding rituals, chanting of Jayamangala Gatha, exchanging rings, and the sacred tying of the nuptial knot.
               </p>
             </div>
           </article>
@@ -457,25 +555,54 @@
         <p class="section-title-en">Kindly RSVP & Contact Us</p>
         <p class="section-subtitle">Your gracious presence will complete our joy</p>
 
-        <!-- Direct Contact Action Card -->
+        <!-- Direct Contact Action Cards -->
         <div class="contact-cards-container">
+          <!-- Chinesh (Groom) -->
           <div class="contact-card" data-aos="zoom-in" data-aos-delay="100">
             <div class="contact-person-info">
-              <span class="contact-role">Contact &amp; Inquiries • විමසීම්</span>
-              <p class="contact-person-name">චිනේෂ් &amp; දුලක්ෂි (Chinesh &amp; Dulakshi)</p>
-              <p class="contact-phone-number">071 165 2393</p>
+              <span class="contact-role">Groom • මනමාලයා</span>
+              <p class="contact-person-name">චිනේෂ් (Chinesh)</p>
+              <a href="tel:0775689278" class="contact-phone-number">
+                <i class="ti ti-phone-call"></i> 077 568 9278
+              </a>
             </div>
             <div class="contact-actions">
-              <a href="tel:0711652393" class="btn-action-icon call" title="Call 071 165 2393" aria-label="Call 071 165 2393">
+              <a href="tel:0775689278" class="btn-action-icon call" title="Call Chinesh 077 568 9278" aria-label="Call Chinesh">
                 <i class="ti ti-phone" aria-hidden="true"></i>
               </a>
               <a 
-                href="https://wa.me/94711652393?text=Hello!%20Regarding%20Chinesh%20%26%20Dulakshi%20Wedding%20Invitation..." 
+                href="https://wa.me/94775689278?text=Hello%20Chinesh!%20Regarding%20the%20Wedding%20Invitation..." 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 class="btn-action-icon whatsapp" 
-                title="WhatsApp 071 165 2393" 
-                aria-label="WhatsApp 071 165 2393"
+                title="WhatsApp Chinesh" 
+                aria-label="WhatsApp Chinesh"
+              >
+                <i class="ti ti-brand-whatsapp" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Dulakshi (Bride) -->
+          <div class="contact-card" data-aos="zoom-in" data-aos-delay="200">
+            <div class="contact-person-info">
+              <span class="contact-role">Bride • මනමාලිය</span>
+              <p class="contact-person-name">දුලක්ෂි (Dulakshi)</p>
+              <a href="tel:0711652393" class="contact-phone-number">
+                <i class="ti ti-phone-call"></i> 071 165 2393
+              </a>
+            </div>
+            <div class="contact-actions">
+              <a href="tel:0711652393" class="btn-action-icon call" title="Call Dulakshi 071 165 2393" aria-label="Call Dulakshi">
+                <i class="ti ti-phone" aria-hidden="true"></i>
+              </a>
+              <a 
+                href="https://wa.me/94711652393?text=Hello%20Dulakshi!%20Regarding%20the%20Wedding%20Invitation..." 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn-action-icon whatsapp" 
+                title="WhatsApp Dulakshi" 
+                aria-label="WhatsApp Dulakshi"
               >
                 <i class="ti ti-brand-whatsapp" aria-hidden="true"></i>
               </a>
@@ -545,10 +672,17 @@
             </button>
 
             <!-- Quick WhatsApp RSVP Option -->
-            <p class="rsvp-whatsapp-alt">
-              Or prefer WhatsApp? 
-              <a href="#" id="rsvp-whatsapp-btn">Send confirmation via WhatsApp</a>
-            </p>
+            <div class="rsvp-whatsapp-box">
+              <p class="rsvp-whatsapp-heading">Or Confirm via WhatsApp:</p>
+              <div class="rsvp-whatsapp-buttons">
+                <a href="#" class="btn-rsvp-wa" id="rsvp-whatsapp-chinesh" title="Send confirmation to Chinesh">
+                  <i class="ti ti-brand-whatsapp"></i> Chinesh
+                </a>
+                <a href="#" class="btn-rsvp-wa" id="rsvp-whatsapp-dulakshi" title="Send confirmation to Dulakshi">
+                  <i class="ti ti-brand-whatsapp"></i> Dulakshi
+                </a>
+              </div>
+            </div>
           </form>
         </div>
 
@@ -583,7 +717,7 @@
           <circle cx="100" cy="100" r="20" fill="#D4AF37"/>
         </svg>
 
-        <p class="footer-blessing-si">✦ දෙවි පිහිටයි • දළදා සමිඳු පිහිටයි ✦</p>
+        <p class="footer-blessing-si">✦ දළදා සමිඳු පිහිටයි ✦</p>
         <h2 class="footer-title">Thank You</h2>
         <p class="footer-gratitude">
           For being a cherished part of our lives and for showering your love and blessings upon us as we begin this sacred lifelong journey.
@@ -602,6 +736,27 @@
 
   <!-- Toast Notification Container -->
   <div id="toast-notification" class="toast-msg" role="status" aria-live="polite"></div>
+
+  <!-- Royal Couple Photo Fullscreen Lightbox Modal -->
+  <div id="portrait-modal" class="portrait-modal" role="dialog" aria-modal="true" aria-label="Chinesh & Dulakshi Wedding Portrait">
+    <div class="portrait-modal-backdrop" id="modal-backdrop"></div>
+    <div class="portrait-modal-content">
+      <button class="portrait-modal-close" id="modal-close" aria-label="Close portrait view">
+        <i class="ti ti-x" aria-hidden="true"></i>
+      </button>
+      <div class="modal-frame">
+        <img 
+          src="./images/couple.jpg" 
+          alt="Chinesh & Dulakshi - Wedding Portrait Full View" 
+          class="modal-couple-img" 
+        />
+        <div class="modal-caption-bar">
+          <p class="modal-couple-names">චිනේෂ් & දුලක්ෂි • Chinesh & Dulakshi</p>
+          <p class="modal-wedding-date">December 07, 2026 • Royal Chance Palace</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Main JavaScript Application Module -->
   <script type="module" src="/js/app.js"></script>
